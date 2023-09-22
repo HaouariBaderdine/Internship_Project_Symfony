@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block body %}
+    <h1>Liste des Commandes Déjà Traitées</h1>
+   
+
+    <hr/>
+
+    {# Formulaire pour déclencher le flow orders_to_csv #}
+    <form action="{{ path('flow_orders_to_csv') }}" method="GET">
+        <button type="submit">Générer le CSV des nouvelles commandes</button>
+    </form>
+    
+{% endblock %}

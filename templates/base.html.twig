@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>
+			{% block title %}Internship Project
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> 
+		{% block stylesheets %}
+			<script src="https://cdn.tailwindcss.com"></script>
+		{% endblock %}
+		{% block javascripts %}{% endblock %}
+
+		</head>
+		<body>
+			<main>
+				{% block body %}{% endblock %}
+			</main>
+			
+			<footer>
+				&copy; Copyright {{ 'now' | date('Y')}} 
+				&middot; <a href="{{ path('app_about')}}" >About Us </a>
+			</footer>
+		</body>
+	</html>
