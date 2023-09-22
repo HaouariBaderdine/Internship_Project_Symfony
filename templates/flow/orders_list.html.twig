@@ -1,16 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Commandes{% endblock %}
+{% block title %}Liste des Commandes
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des Commandes Déjà Traitées</h1>
-   
+	<div class="container">
+		<h2 class="mt-5">Liste des Commandes Déjà Traitées</h2>
+		<hr/>
+		{# le contenu de commandes ici #}
 
-    <hr/>
+		<table class="table table-striped table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>Numéro de Commande</th>
+					<th>Client</th>
+					<th>Montant</th>
+					<th>Devise</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if orders is empty %}
+					<tr>
+						<td colspan="4">Aucune commande n'a été trouvée.</td>
+					</tr>
+				{% else %}
+					{% for order in orders %}
+						<tr>
+							<td>{{ order.orderNumber }}</td>
+							<td>{{ order.customerName }}</td>
+							<td>{{ order.amount }}</td>
+							<td>{{ order.currency }}</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
 
-    {# Formulaire pour déclencher le flow orders_to_csv #}
-    <form action="{{ path('flow_orders_to_csv') }}" method="GET">
-        <button type="submit">Générer le CSV des nouvelles commandes</button>
-    </form>
-    
+
+		{# Formulaire pour déclencher le flow orders_to_csv #}
+		<form action="{{ path('flow_orders_to_csv') }}" method="GET">
+			<button class="btn btn-success" type="submit">Générer le CSV des nouvelles commandes</button>
+		</form>
+	</div>
 {% endblock %}
