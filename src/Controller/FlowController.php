@@ -46,27 +46,6 @@ class FlowController extends AbstractController
     }
 
 
-    #[Route('orders', name: 'orders_list')]
-    public function ordersListAction(LoggerInterface $logger): Response
-    {
-
-        // Afficher une page web décrivant les commandes déjà traitées par l'outil
-        try {
-
-            //Récupérez les données des commandes depuis l'API :
-            $client = HttpClient::createForBaseUri('http://localhost:3000/api/results/');
-
-            $ordersData = $this->fetchOrdersFromAPI($client);
-
-
-            return $this->render('flow/orders_list.html.twig', [
-                'orders' => $ordersData, // Passer les données des commandes comme une variable 'orders'
-            ]);
-        } catch (\Exception $e) {
-            return $this->handleError($e, $logger);
-        }
-    }
-
     #[Route('/flow/orders_to_csv', name: 'flow_orders_to_csv')]
     public function ordersToCsvAction(Request $request, LoggerInterface $logger): Response
     {
@@ -329,4 +308,28 @@ class FlowController extends AbstractController
         $logger->error($errorMessage, ['exception' => $e]);
         throw new HttpException(500, $errorMessage);
     }
+
+
+    
+    #[Route('flow/orders', name: 'flow_orders_list')]
+    public function ordersListAction(LoggerInterface $logger): Response
+    {
+
+        // Afficher une page web décrivant les commandes de l'api
+        try {
+
+            //Récupérez les données des commandes depuis l'API :
+            $client = HttpClient::createForBaseUri('http://localhost:3000/api/results/');
+
+            $ordersData = $this->fetchOrdersFromAPI($client);
+
+
+            return $this->render('flow/flow_orders_list.html.twig', [
+                'orders' => $ordersData, // Passer les données des commandes comme une variable 'orders'
+            ]);
+        } catch (\Exception $e) {
+            return $this->handleError($e, $logger);
+        }
+    }
+
 }

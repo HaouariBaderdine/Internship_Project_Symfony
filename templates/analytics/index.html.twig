@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Analytics</h1>
+        
+        <div id="json-data" class="mt-4" style="white-space: pre;"></div>
+
+        <h2 class="mt-4">Top Customers</h2>
+        <ul class="list-group">
+            {% for clientId, revenue in topCustomers %}
+                <li class="list-group-item">
+                    <span class="font-weight-bold">Customer ID:</span> {{ clientId }} 
+                    <span class="font-weight-bold ml-3">Revenue:</span> {{ revenue }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="mt-4">Quantiles</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Quantile</th>
+                    <th>Number of Customers</th>
+                    <th>Max Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quantile, info in quantiles %}
+                    <tr>
+                        <td>{{ quantile }}</td>
+                        <td>{{ info['Number of Customers'] }}</td>
+                        <td>{{ info['Max Revenue'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+            // Récupérez les données JSON transmises depuis le contrôleur
+            var jsonData = {{ jsonData|raw }};
+
+            // Affichez le JSON dans l'élément avec l'ID "json-data"
+            document.getElementById("json-data").textContent = JSON.stringify(jsonData, null, 2);
+        </script>
+    </div>
+{% endblock %}
