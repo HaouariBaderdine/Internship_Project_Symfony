@@ -10,15 +10,17 @@ class OrderLine
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', unique: true)]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderLines')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $order;
 
-    #[ORM\ManyToOne(targetEntity: Item::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @ORM\ManyToOne(targetEntity=Item::class, cascade={"persist"})
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id", nullable=false)
+     */
     private ?Item $item;
 
     #[ORM\Column(type: 'float')]

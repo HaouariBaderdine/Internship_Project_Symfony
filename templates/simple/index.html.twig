@@ -1,20 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Hello in Our Internship project !{% endblock %}
+{% block title %}Hello in Our Internship project !
+{% endblock %}
 
 {% block body %}
 
-	<h1>
-        Bonjour, la liste des routes possibles dans notre projet :
-	</h1>
-
-    <ul>
-        <li><a href="{{path('orders_list')}}">Liste des commandes</a></li>
-        <li><a href="{{path('orders_list')}}">Analyse des commandes</a></li>
-    </ul>
-
-	<p>It's currently
-		{{ 'now' | date('h:i A')}}.
-	</p>
+	<div class="container">
+		<h2 class="mt-6">
+			Bonjour, la liste des routes possibles dans notre projet :
+		</h2>
+        <hr/>
+		<ul>
+			<li><a href="{{path('orders_list')}}">Liste des commandes</a></li>
+			<li><a href="{{path('orders_list')}}">Analyse des commandes</a></li>
+		</ul>
+	</div>
 
 {% endblock %}

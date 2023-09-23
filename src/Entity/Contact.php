@@ -9,9 +9,8 @@ use App\Repository\ContactRepository;
 class Contact
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'guid', unique: true)]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $accountName = null;
@@ -34,10 +33,18 @@ class Contact
     #[ORM\Column(length: 10)]
     private ?string $zipCode = null;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
+
+    public function setId(?string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
     public function getAccountName(): ?string
     {

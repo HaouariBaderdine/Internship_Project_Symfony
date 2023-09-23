@@ -12,9 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Order
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $orderId = null;
+    #[ORM\Column(type: 'guid', unique: true)]
+    private ?string $id = null;
 
     #[ORM\Column(type: 'integer')]
     private int $orderNumber;
@@ -26,9 +25,8 @@ class Order
     private string $currency;
 
     #[ORM\ManyToOne(targetEntity: Contact::class)]
-    #[ORM\JoinColumn(name: 'deliver_to_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'deliver_to_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     private ?Contact $deliverTo = null;
-
 
     #[ORM\OneToMany(targetEntity: OrderLine::class, mappedBy: 'order', cascade: ['persist'])]
     private Collection $salesOrderLines;
@@ -38,14 +36,14 @@ class Order
         $this->salesOrderLines = new ArrayCollection();
     }
 
-    public function getOrderId(): ?int
+    public function getId(): ?string
     {
-        return $this->orderId;
+        return $this->id;
     }
 
-    public function setOrderId(int $orderId): self
+    public function setId(?string $id): self
     {
-        $this->orderId = $orderId;
+        $this->id = $id;
         return $this;
     }
 
@@ -101,11 +99,13 @@ class Order
         return $this->salesOrderLines;
     }
 
-    public function addSalesOrderLine(OrderLine $salesOrderLine): self
+    public function setSalesOrderLine(array $salesOrderLines): self
     {
-        if (!$this->salesOrderLines->contains($salesOrderLine)) {
-            $this->salesOrderLines[] = $salesOrderLine;
-            $salesOrderLine->setOrder($this);
+        foreach ($salesOrderLines as $salesOrderLine) {
+            if (!$this->salesOrderLines->contains($salesOrderLine)) {
+                $this->salesOrderLines[] = $salesOrderLine;
+                $salesOrderLine->setOrder($this);
+            }
         }
 
         return $this;

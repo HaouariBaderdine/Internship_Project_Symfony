@@ -13,7 +13,8 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Numéro de Commande</th>
-					<th>Client</th>
+					<th>Id Client</th>
+					<th>Nom Client</th>
 					<th>Montant</th>
 					<th>Devise</th>
 				</tr>
@@ -24,12 +25,13 @@
 						<td colspan="4">Aucune commande n'a été trouvée.</td>
 					</tr>
 				{% else %}
-					{% for order in orders %}
+					{% for order in orders.results %}
 						<tr>
-							<td>{{ order.orderNumber }}</td>
-							<td>{{ order.customerName }}</td>
-							<td>{{ order.amount }}</td>
-							<td>{{ order.currency }}</td>
+							<td>{{ order.OrderNumber }}</td>
+							<td>{{ order.DeliverTo }}</td>
+							<td> ######## </td>
+							<td>{{ order.Amount }}</td>
+							<td>{{ order.Currency }}</td>
 						</tr>
 					{% endfor %}
 				{% endif %}
