@@ -8,10 +8,10 @@ Le test a pour objectif principal la réalisation d’un service web permettant 
    -   Déterminer et enregistrer dans une map, Customer par Customer le total Chiffre d’Affaires.
    -   Afficher les 10 alétoires avec le grand chiffre d'affaire (top_customer).
    
-Cette application doit être développée avec 
-• SYMFONY 6 comme framework coté serveur
-• Mysql 8.0 comme SGBD sql
-• php 8.0 <<
+Cette application doit être développée avec:
+- SYMFONY 6 comme framework coté serveur
+- Mysql 8.0 comme SGBD sql
+- php 8.0 <<
 
 ## Start serveur symfony
 
