@@ -321,6 +321,14 @@ class FlowController extends AbstractController
             //Récupérez les données des commandes depuis l'API :
             $client = HttpClient::createForBaseUri('http://localhost:3000/api/results/');
 
+            /*
+            $client = HttpClient::createForBaseUri('https://4ebb0152-1174-42f0-ba9b-4d6a69cf93be.mock.pstmn.io/', [
+                'headers' => [
+                    'x-api-key' => 'PMAK-62642462da39cd50e9ab4ea7-815e244f4fdea2d2075d8966cac3b7f10b',
+                ],
+            ]);
+            */
+            
             $ordersData = $this->fetchOrdersFromAPI($client);
 
 
